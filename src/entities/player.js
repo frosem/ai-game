@@ -56,9 +56,10 @@ export class Player {
     this.x += (this.vx + p.driftX) * dt;
     this.y += this.vy * dt;
 
-    // Rule R3: the ship never stops moving. If drag has cancelled the drift,
-    // snap to pure drift rather than allowing a zero-velocity state.
-    if (Math.hypot(this.vx + p.driftX, this.vy) < p.driftX) {
+    // Rule R3: the ship never stops moving. Only snap when the resultant
+    // velocity is effectively zero; using driftX here cancels left movement
+    // before its counter-thrust can build up.
+    if (Math.hypot(this.vx + p.driftX, this.vy) < 1) {
       this.vx = 0;
       this.vy = 0;
     }
