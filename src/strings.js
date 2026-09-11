@@ -2,12 +2,13 @@
 // A rename is a two-minute edit because nothing else hard-codes a name.
 
 export const STRINGS = {
-  title: 'PROTECT MANDALORIAN & GROGU',
-  subtitle: 'A Star Wars fan story',
-  tagline: 'Shoot what you can. Feel the rest. Hold the line.',
-  thisIsTheWay: 'This is the Way.',
+  title: 'PROTECT',
+  titleTarget: 'MANDALORIAN & GROGU',
+  subtitle: 'KEEP THEM ALIVE // 02:00',
+  tagline: 'THE CREST IS THE OBJECTIVE',
+  thisIsTheWay: 'SURVIVE THE RUN',
 
-  startButton: 'FLY',
+  startButton: 'START GAME',
   storyButton: 'STORY',
   muteLabel: 'MUTED',
   unmuteLabel: 'SOUND ON',

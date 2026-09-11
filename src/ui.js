@@ -10,8 +10,8 @@ const H = CONFIG.VIRTUAL_H;
 
 export class UI {
   constructor() {
-    this.startRect = { x: W / 2 - 150, y: 452, w: 300, h: 64 };
-    this.storyRect = { x: W / 2 - 150, y: 532, w: 300, h: 52 };
+    this.startRect = { x: 120, y: 532, w: 330, h: 64 };
+    this.storyRect = { x: 120, y: 610, w: 330, h: 48 };
     this.muteRect = { x: W - 190, y: 24, w: 166, h: 44 };
   }
 
@@ -152,30 +152,67 @@ export class UI {
     ctx.fillRect(0, 0, W, H);
     this._starTitle(ctx);
 
-    this._text(ctx, STRINGS.title, W / 2, 210, 86, '#ffffff', 'center');
-    this._text(ctx, STRINGS.subtitle, W / 2, 268, 28, '#8fe3ff', 'center');
-    this._text(ctx, STRINGS.tagline, W / 2, 322, 24, 'rgba(210,225,255,0.85)', 'center');
-    this._text(ctx, STRINGS.thisIsTheWay, W / 2, 366, 22, 'rgba(255,209,102,0.9)', 'center');
+    // Mission card: asymmetric layout gives the title a clear focal area while
+    // the ship silhouettes explain the objective before the player starts.
+    const card = ctx.createLinearGradient(0, 0, 0, H);
+    card.addColorStop(0, 'rgba(9,20,38,0.94)');
+    card.addColorStop(1, 'rgba(4,8,18,0.46)');
+    ctx.fillStyle = card;
+    ctx.fillRect(72, 86, 620, 650);
+    ctx.strokeStyle = 'rgba(143,227,255,0.22)';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(72, 86, 620, 650);
+    ctx.fillStyle = 'rgba(143,227,255,0.75)';
+    ctx.fillRect(72, 86, 8, 650);
 
-    // hero lineup
-    drawSprite('portrait_luke', ctx, W / 2 - 300, 410, 0, 0.78);
-    drawSprite('portrait_grogu', ctx, W / 2, 408, 0, 0.92);
-    drawSprite('portrait_mando', ctx, W / 2 + 300, 410, 0, 0.78);
+    this._text(ctx, STRINGS.title, 120, 174, 82, '#ffffff', 'left');
+    this._text(ctx, STRINGS.titleTarget, 120, 250, 47, '#8fe3ff', 'left');
+    this._text(ctx, STRINGS.subtitle, 124, 312, 23, '#ffd166', 'left');
+    this._text(ctx, STRINGS.tagline, 124, 358, 21, 'rgba(220,232,250,0.88)', 'left');
+    this._text(ctx, STRINGS.thisIsTheWay, 124, 398, 18, 'rgba(180,205,235,0.72)', 'left');
+
+    // The action is shown spatially: escort behind, player in front, threats
+    // approaching from the upper-right.
+    ctx.strokeStyle = 'rgba(143,227,255,0.18)';
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(760, 690);
+    ctx.lineTo(1360, 170);
+    ctx.stroke();
+    ctx.strokeStyle = 'rgba(255,91,110,0.28)';
+    ctx.beginPath();
+    ctx.moveTo(1030, 120);
+    ctx.lineTo(1420, 520);
+    ctx.stroke();
+
+    drawSprite('convoy_ship', ctx, 1040, 420, -0.12, 2.25);
+    drawSprite('player_xwing', ctx, 1250, 620, -0.48, 2.25);
+    drawSprite('enemy_interceptor', ctx, 1040, 150, 0.18, 1.7);
+    drawSprite('enemy_interceptor', ctx, 1280, 112, 0.28, 1.45);
+    drawSprite('enemy_gunship', ctx, 1450, 260, 0.38, 1.25);
+    drawSprite('portrait_grogu', ctx, 830, 690, 0, 0.62);
+    drawSprite('portrait_mando', ctx, 900, 690, 0, 0.62);
 
     this._button(ctx, this.startRect, STRINGS.startButton, '#8fe3ff', true);
     this._button(ctx, this.storyRect, STRINGS.storyButton, '#ffd166', false);
 
-    // controls
-    ctx.textAlign = 'center';
-    for (let i = 0; i < STRINGS.controls.length; i++) {
-      this._text(ctx, STRINGS.controls[i], W / 2, 648 + i * 34, 20, 'rgba(190,205,230,0.8)', 'center');
-    }
+    // Compact control strip instead of four lines of instructional copy.
+    ctx.fillStyle = 'rgba(5,12,24,0.88)';
+    this._roundRect(ctx, 760, 760, 760, 58, 10);
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(255,255,255,0.18)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+    this._text(ctx, '[A][D] / ARROWS MOVE', 790, 789, 18, '#8fe3ff', 'left');
+    this._text(ctx, '[MOUSE] FIRE', 1000, 789, 18, '#ffd166', 'left');
+    this._text(ctx, '[SPACE] FORCE', 1230, 789, 18, '#8fe3a0', 'left');
+    this._text(ctx, 'R RESTART  ·  ESC PAUSE', 1210, 846, 16, 'rgba(180,200,230,0.72)', 'center');
 
     this._text(
       ctx,
       `${STRINGS.hud.best}: ${world.score.best}`,
-      W / 2,
-      796,
+      285,
+      700,
       22,
       'rgba(255,209,102,0.9)',
       'center'
@@ -183,8 +220,8 @@ export class UI {
     this._text(
       ctx,
       STRINGS.builtWith,
-      W / 2,
-      850,
+      800,
+      865,
       16,
       'rgba(150,170,200,0.7)',
       'center'
