@@ -2,7 +2,7 @@
 // A rename is a two-minute edit because nothing else hard-codes a name.
 
 export const STRINGS = {
-  title: 'PROTECT THE FOUNDLING',
+  title: 'PROTECT MANDALORIAN & GROGU',
   subtitle: 'A Star Wars fan story',
   tagline: 'Shoot what you can. Feel the rest. Hold the line.',
   thisIsTheWay: 'This is the Way.',
@@ -27,7 +27,7 @@ export const STRINGS = {
     combo: 'COMBO',
     force: 'FORCE',
     hyperdrive: 'HYPERDRIVE',
-    protect: 'PROTECT THE FOUNDLING',
+    protect: 'PROTECT MANDALORIAN & GROGU',
   },
 
   characters: {
@@ -60,7 +60,7 @@ export const STRINGS = {
     { heading: 'THE MANDALORIAN FIGHTS BACK', line: 'Four of them. Stay down, kid.' },
     { heading: 'GUNS GO DARK', line: 'Guns are dead — that hit fried them!' },
     { heading: 'IT COSTS HIM', line: "Then we do this the hard way." },
-    { heading: 'PROTECT THE FOUNDLING' },
+    { heading: 'PROTECT MANDALORIAN & GROGU' },
   ],
   skip: 'SKIP',
   cinematicHint: 'Space / click to skip',

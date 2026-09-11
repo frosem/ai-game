@@ -4,7 +4,7 @@ Contest rule R11 asks each team to explain how it used AI. This is that record.
 
 ## Summary
 
-**Protect the Foundling** is a 4-hour browser game built with an AI coding agent
+**Protect Mandalorian & Grogu** is a 4-hour browser game built with an AI coding agent
 (Claude Code / opencode running a large language model) working from a locked
 design document. A human wrote the design, made every product and design
 decision, ran the browser, played the game and judged the feel. The AI wrote the
