@@ -1,0 +1,12 @@
+# Local browser automation traces and snapshots
+.playwright-cli/
+
+# Windows download metadata
+*:Zone.Identifier
+
+# Generated art-pack copy is kept locally but is not needed by the playable game
+project-sw/
+
+# Local editor and OS files
+.DS_Store
+Thumbs.db
