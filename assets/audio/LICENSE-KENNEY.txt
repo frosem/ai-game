@@ -1,0 +1,15 @@
+The gameplay and UI audio clips in this directory were sourced from Kenney's
+Sci-fi Sounds and UI Audio packs.
+
+License: Creative Commons Zero (CC0)
+https://creativecommons.org/publicdomain/zero/1.0/
+
+Source pages:
+https://kenney.nl/assets/sci-fi-sounds
+https://kenney.nl/assets/ui-audio
+
+The license permits personal, educational and commercial use. Attribution is
+not required, but crediting Kenney / kenney.nl is appreciated.
+
+The character cues in assets/audio/characters/ are original synthesized cues
+created for this project and are not official character voices.

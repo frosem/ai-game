@@ -197,10 +197,11 @@ function enemiesVsPlayer(world) {
 // STRINGS.playerHits only has entries for hearts still remaining, and the
 // game-over overlay would cover the panel anyway.
 function onPlayerHit(world) {
-  const { player, dialog } = world;
+  const { player, dialog, audio } = world;
   if (!dialog) return;
   const line = STRINGS.playerHits[player.maxHearts - player.hearts - 1];
   if (line) dialog.push('luke', line, { portrait: 'portrait_luke' });
+  if (audio) audio.play('lukeRadio');
 }
 
 // Any damage reaching the convoy consumes a heart and triggers a Grogu save.

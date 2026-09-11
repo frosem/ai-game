@@ -198,7 +198,7 @@ export class Cinematic {
         });
       }
       this.luke = { x: 860, y: -160, targetY: 560, t: 0 };
-      play(world, 'surge');
+      play(world, 'lukeArrival');
     }
     if (this.luke) {
       this.luke.t += dt;

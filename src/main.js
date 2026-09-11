@@ -357,6 +357,7 @@ class Game {
     s.pendingConvoyDeath = false;
     s.slowmo = 0;
     s.name = State.PLAYING;
+    this.audio.play('engineBurst');
 
     this.fx.greenFlash = 0;
     this.fx.redTint = 0;
@@ -370,7 +371,7 @@ class Game {
     this.particles.burst(this.convoy.x, this.convoy.y, 40, '#ff7a5a', 380, 0.9, 6);
     this.particles.explode(this.convoy.x, this.convoy.y, 'fx_explosion_big', 2.4, 16);
     this.fx.addShake(34);
-    this.audio.play('explosion');
+    this.audio.play('convoyExplosion');
   }
 
   endMatch(result) {
