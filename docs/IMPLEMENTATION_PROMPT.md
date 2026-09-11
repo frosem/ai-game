@@ -331,7 +331,7 @@ src/
   entities/          player.js convoy.js enemy.js bolt.js asteroid.js particle.js
   systems/           spawn.js collision.js force.js score.js dialog.js
 assets/              empty; teammate's art lands here later
-docs/                SDD.md  AI_USAGE.md
+docs/                SDD.md  AI usage record
 ```
 
 Per-tick update order:
@@ -382,7 +382,7 @@ have been observed running.**
 | **H1** | 0:20–1:20 | Player with momentum + mouse aim + held auto-fire. Convoy on its scripted sine path. Interceptors + gunships. Pooled bolts. Collisions. Hearts drain on both ships |
 | **H2** | 1:20–2:20 | Force field (universal scope, harsh meter, guns offline). Ion Lancers with telegraphs. Grogu's saves + all 3 barks including the slow-motion third. Asteroids on linear paths |
 | **H3** | 2:20–3:20 | Spawn director ramping on elapsed time. 120 s hyperdrive clock. Score + combo. All 3 end states. `R` restart. Full HUD |
-| **H4** | 3:20–4:00 | Intro slides, WebAudio SFX, screen shake, particles, **tuning pass on real feel**, `docs/AI_USAGE.md` |
+| **H4** | 3:20–4:00 | Intro slides, WebAudio SFX, screen shake, particles, **tuning pass on real feel**, AI usage record |
 
 **3:20 is the real deadline.** At that point the game must be complete, running locally and
 satisfying all 11 contest requirements. H4 is expendable polish; the requirements are not. If
@@ -432,7 +432,7 @@ The game is not done until every line is true and has been **observed in the bro
       numbers outside `config.js`
 - [ ] 60 fps with a full late-match screen of entities
 - [ ] Zero console errors
-- [ ] `docs/AI_USAGE.md` written — the contest requires each team to explain its AI usage
+- [ ] AI usage record written — the contest requires each team to explain its AI usage
 
 ## Working style
 

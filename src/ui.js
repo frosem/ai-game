@@ -166,12 +166,15 @@ export class UI {
     ctx.fillRect(72, 86, 8, 650);
 
     this._text(ctx, STRINGS.title, 120, 174, 82, '#ffffff', 'left');
-    this._text(ctx, STRINGS.titleTarget, 120, 250, 47, '#8fe3ff', 'left');
+    this._textFit(ctx, STRINGS.titleTarget, 120, 250, 47, 32, 520, '#8fe3ff', 'left');
     this._text(ctx, STRINGS.subtitle, 124, 312, 23, '#ffd166', 'left');
     this._text(ctx, STRINGS.tagline, 124, 358, 21, 'rgba(220,232,250,0.88)', 'left');
     this._text(ctx, STRINGS.thisIsTheWay, 124, 398, 18, 'rgba(180,205,235,0.72)', 'left');
+    this._text(ctx, STRINGS.missionTitle, 124, 438, 16, '#8fe3ff', 'left');
+    this._textFit(ctx, STRINGS.missionLine1, 124, 464, 18, 15, 520, '#ffffff', 'left');
+    this._textFit(ctx, STRINGS.missionLine2, 124, 490, 18, 14, 520, 'rgba(220,232,250,0.82)', 'left');
 
-    // The action is shown spatially: escort behind, player in front, threats
+    // The action is shown spatially: convoy behind, player in front, threats
     // approaching from the upper-right.
     ctx.strokeStyle = 'rgba(143,227,255,0.18)';
     ctx.lineWidth = 3;
@@ -203,9 +206,9 @@ export class UI {
     ctx.strokeStyle = 'rgba(255,255,255,0.18)';
     ctx.lineWidth = 1;
     ctx.stroke();
-    this._text(ctx, '[A][D] / ARROWS MOVE', 790, 789, 18, '#8fe3ff', 'left');
-    this._text(ctx, '[MOUSE] FIRE', 1000, 789, 18, '#ffd166', 'left');
-    this._text(ctx, '[SPACE] FORCE', 1230, 789, 18, '#8fe3a0', 'left');
+    this._text(ctx, '[WASD] / [ARROWS] MOVE', 790, 789, 18, '#8fe3ff', 'left');
+    this._text(ctx, '[CLICK] FIRE', 1080, 789, 18, '#ffd166', 'left');
+    this._text(ctx, '[SPACE] FORCE', 1250, 789, 18, '#8fe3a0', 'left');
     this._text(ctx, 'R RESTART  ·  ESC PAUSE', 1210, 846, 16, 'rgba(180,200,230,0.72)', 'center');
 
     this._text(
@@ -215,15 +218,6 @@ export class UI {
       700,
       22,
       'rgba(255,209,102,0.9)',
-      'center'
-    );
-    this._text(
-      ctx,
-      STRINGS.builtWith,
-      800,
-      865,
-      16,
-      'rgba(150,170,200,0.7)',
       'center'
     );
   }
@@ -291,6 +285,16 @@ export class UI {
     ctx.fillText(text, x + 2, y + 2);
     ctx.fillStyle = color;
     ctx.fillText(text, x, y);
+  }
+
+  _textFit(ctx, text, x, y, size, minSize, maxWidth, color, align) {
+    let fitted = size;
+    ctx.font = `bold ${fitted}px system-ui, -apple-system, Segoe UI, sans-serif`;
+    while (fitted > minSize && ctx.measureText(text).width > maxWidth) {
+      fitted -= 1;
+      ctx.font = `bold ${fitted}px system-ui, -apple-system, Segoe UI, sans-serif`;
+    }
+    this._text(ctx, text, x, y, fitted, color, align);
   }
 
   _bar(ctx, x, y, w, h, frac, color, bg) {

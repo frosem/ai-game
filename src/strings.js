@@ -7,6 +7,9 @@ export const STRINGS = {
   subtitle: 'KEEP THEM ALIVE // 02:00',
   tagline: 'THE CREST IS THE OBJECTIVE',
   thisIsTheWay: 'SURVIVE THE RUN',
+  missionTitle: 'MISSION',
+  missionLine1: 'Protect the Razor Crest for 2 minutes.',
+  missionLine2: 'Shoot threats. Use the Force to move asteroids and stop incoming fire.',
 
   startButton: 'START GAME',
   storyButton: 'STORY',
@@ -16,10 +19,9 @@ export const STRINGS = {
   pausedHint: 'Esc or P to resume · R to restart',
 
   controls: [
-    'WASD / Arrows — fly the X-wing (it never stops moving)',
-    'Mouse — aim · Left mouse (hold) — fire',
-    'Right mouse / Space — the Force (guns go offline)',
-    'R — restart · Esc / P — pause',
+    'WASD / Arrow keys — move',
+    'Click — fire',
+    'Space — use the Force',
   ],
 
   hud: {
@@ -81,5 +83,4 @@ export const STRINGS = {
   },
 
   countdown: 'PROTECT THEM',
-  builtWith: 'Built with AI pair-programming · see docs/AI_USAGE.md',
 };

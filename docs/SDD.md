@@ -43,7 +43,7 @@ Every contest rule mapped to a concrete feature, so nothing is lost at demo time
 | R8 | Restart quickly | `R` key / click, in-memory reset, no page reload, cinematic auto-skipped | < 500 ms, measured |
 | R9 | Match ≤ 2 minutes | Hard 120 s match clock = hyperdrive charge bar. Win at 120 s | Timer visible |
 | R10 | Published at accessible URL | Static site, GitHub Pages | Public link |
-| R11 | Explain AI usage | `docs/AI_USAGE.md` + a title-screen "How we built this" panel | Document |
+| R11 | Explain AI usage | AI usage record + a title-screen "How we built this" panel | Document |
 
 Cinematic sits **outside** the 120 s clock (rule R9 covers the match only) and is skippable.
 
@@ -118,7 +118,7 @@ src/
     dialog.js        Grogu/Mando bark queue
 assets/              teammate's art lands here (see §11)
 docs/
-  SDD.md  AI_USAGE.md
+  SDD.md  AI usage record
 ```
 
 ### 5.2 Game state machine
@@ -533,7 +533,7 @@ page reload, no asset reload, no cinematic. Target under 500 ms, and it will be 
 | **M3** | **The Force** | Ion lancers, indestructible bolts, Force field, guns-offline trade-off, Grogu saves + barks |
 | **M4** | Asteroids | Linear `(x1,y1)→(x2,y2)` trajectories, sizes, Force deflection |
 | **M5** | Full match | Spawn director, 120 s clock, scoring/combo, all 3 end states, instant restart |
-| **M6** | Polish + ship | Cinematic, audio, HUD juice, `?debug=1` tuning panel, GitHub Pages deploy, `AI_USAGE.md` |
+| **M6** | Polish + ship | Cinematic, audio, HUD juice, `?debug=1` tuning panel, GitHub Pages deploy, AI usage record |
 
 M0–M5 is the whole game and is where the effort belongs. M6 is what wins votes. **The build
 must be playable end-to-end and deployed by the end of M5** — from then on every change is
@@ -640,7 +640,7 @@ relative-path rule in §18.5. So gating the deploy on approval costs nothing in 
 | **H1** | 0:20–1:20 | Combat core | Player with momentum + mouse aim + cooldown fire. Convoy on its path. Interceptors + gunships. Bolts pooled. Collisions. Hearts drain on both ships |
 | **H2** | 1:20–2:20 | The Force + asteroids | Force field (universal scope, harsh meter, guns offline). Ion Lancers with telegraphs. Grogu saves + 3 barks. Asteroids on linear `(x1,y1)→(x2,y2)` paths |
 | **H3** | 2:20–3:20 | A real match | Spawn director ramping on elapsed time. 120 s hyperdrive clock. Score + combo. All 3 end states. `R` to restart instantly. Full HUD |
-| **H4** | 3:20–4:00 | Polish, then owner review | Intro slides, WebAudio SFX, screen shake, particles, **tuning pass on real feel**, `AI_USAGE.md`. Ends with the owner playing the local build and deciding whether to deploy |
+| **H4** | 3:20–4:00 | Polish, then owner review | Intro slides, WebAudio SFX, screen shake, particles, **tuning pass on real feel**, AI usage record. Ends with the owner playing the local build and deciding whether to deploy |
 | **DEPLOY** | on approval | Netlify drop | Only after the owner approves the local build. §18.5 |
 
 **End of H3 is the checkpoint that matters.** At 3:20 the game must be complete, deployed and
