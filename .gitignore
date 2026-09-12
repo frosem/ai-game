@@ -11,3 +11,9 @@ project-sw/
 .DS_Store
 Thumbs.db
 .vercel
+.env*
+.vercel/
+node_modules/
+.agents/
+.claude/
+skills-lock.json

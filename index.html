@@ -9,6 +9,18 @@
   </head>
   <body>
     <canvas id="game"></canvas>
+    <section id="leaderboard-modal" class="leaderboard-modal" hidden>
+      <div class="leaderboard-card" role="dialog" aria-modal="true" aria-labelledby="leaderboard-title">
+        <button id="leaderboard-close" class="leaderboard-close" type="button" aria-label="Close leaderboard">×</button>
+        <h1 id="leaderboard-title">LEADERBOARD</h1>
+        <div id="leaderboard-body"></div>
+        <form id="pilot-name-form" class="pilot-name-form">
+          <label for="pilot-name">PILOT NAME</label>
+          <input id="pilot-name" name="pilotName" maxlength="16" autocomplete="nickname" placeholder="Enter your name" hidden />
+          <button type="submit">SAVE NAME</button>
+        </form>
+      </div>
+    </section>
     <script type="module" src="./src/main.js"></script>
   </body>
 </html>

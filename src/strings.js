@@ -13,6 +13,7 @@ export const STRINGS = {
 
   startButton: 'START GAME',
   storyButton: 'STORY',
+  leaderboardButton: 'LEADERBOARD',
   muteLabel: 'MUTED',
   unmuteLabel: 'SOUND ON',
   pausedTitle: 'PAUSED',
@@ -80,6 +81,8 @@ export const STRINGS = {
     score: 'SCORE',
     best: 'BEST SCORE',
     newBest: 'NEW BEST',
+    rank: 'YOUR RANK',
+    submitting: 'SAVING SCORE...',
   },
 
   countdown: 'PROTECT THEM',

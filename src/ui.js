@@ -10,8 +10,9 @@ const H = CONFIG.VIRTUAL_H;
 
 export class UI {
   constructor() {
-    this.startRect = { x: 120, y: 532, w: 330, h: 64 };
-    this.storyRect = { x: 120, y: 610, w: 330, h: 48 };
+    this.startRect = { x: 120, y: 532, w: 330, h: 56 };
+    this.storyRect = { x: 120, y: 598, w: 330, h: 44 };
+    this.leaderboardRect = { x: 120, y: 652, w: 330, h: 44 };
     this.muteRect = { x: W - 190, y: 24, w: 166, h: 44 };
   }
 
@@ -198,6 +199,7 @@ export class UI {
 
     this._button(ctx, this.startRect, STRINGS.startButton, '#8fe3ff', true);
     this._button(ctx, this.storyRect, STRINGS.storyButton, '#ffd166', false);
+    this._button(ctx, this.leaderboardRect, STRINGS.leaderboardButton, '#8fe3a0', false);
 
     // Compact control strip instead of four lines of instructional copy.
     ctx.fillStyle = 'rgba(5,12,24,0.88)';
@@ -215,8 +217,8 @@ export class UI {
       ctx,
       `${STRINGS.hud.best}: ${world.score.best}`,
       285,
-      700,
-      22,
+      716,
+      18,
       'rgba(255,209,102,0.9)',
       'center'
     );
@@ -262,6 +264,17 @@ export class UI {
     if (world.score.newBest) {
       this._text(ctx, g.newBest, W / 2, 552, 30, '#ffd166', 'center');
     }
+
+    const result = world.leaderboard?.lastResult;
+    this._text(
+      ctx,
+      result?.rank ? `${g.rank}: #${result.rank}` : g.submitting,
+      W / 2,
+      590,
+      24,
+      result?.rank ? '#8fe3a0' : 'rgba(180,200,230,0.8)',
+      'center'
+    );
 
     this._text(ctx, g.pressR, W / 2, 690, 34, '#ffffff', 'center');
     this._text(ctx, g.pressRClick, W / 2, 732, 20, 'rgba(180,200,230,0.8)', 'center');

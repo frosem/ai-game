@@ -21,6 +21,7 @@ import { ForceSystem } from './systems/force.js';
 import { Score } from './systems/score.js';
 import { DialogSystem } from './systems/dialog.js';
 import { handleCollisions } from './systems/collision.js';
+import { Leaderboard } from './leaderboard.js';
 
 const STEP = 1 / 60;
 const MAX_FRAME = 0.05; // 50 ms cap so alt-tab cannot tunnel collisions
@@ -56,6 +57,7 @@ class Game {
     this.spawn = new SpawnDirector();
     this.force = new ForceSystem();
     this.dialog = new DialogSystem();
+    this.leaderboard = new Leaderboard();
 
     const self = this;
     this.fx = {
@@ -100,6 +102,7 @@ class Game {
       spawn: this.spawn,
       fx: this.fx,
       state: this.state,
+      leaderboard: this.leaderboard,
     };
 
     this.acc = 0;
@@ -314,6 +317,10 @@ class Game {
         this.state.name = State.CINEMATIC;
         return;
       }
+      if (this.ui.hit(this.ui.leaderboardRect, m.x, m.y)) {
+        this.leaderboard.showBoard();
+        return;
+      }
       this.beginFromTitle();
       return;
     }
@@ -321,6 +328,10 @@ class Game {
   }
 
   beginFromTitle() {
+    if (!this.leaderboard.getName()) {
+      this.leaderboard.requestName(() => this.beginFromTitle());
+      return;
+    }
     this.audio.play('uiClick');
     this._skipPrev = this.input.isDown('Space') || this.input.isDown('Enter');
     if (!this.cinematicSeen) {
@@ -333,6 +344,15 @@ class Game {
   }
 
   startMatch() {
+    if (!this.leaderboard.getName()) {
+      if (this._namePromptPending) return;
+      this._namePromptPending = true;
+      this.leaderboard.requestName(() => {
+        this._namePromptPending = false;
+        this.startMatch();
+      });
+      return;
+    }
     // reset pooled state in place; no reload, no cinematic
     this.player.reset();
     this.convoy.reset();
@@ -388,6 +408,7 @@ class Game {
       this.score.finishLoss();
       this.audio.play('gameover');
     }
+    void this.leaderboard.submitScore(this.score.score);
   }
 
   // -------------------------------------------------------------------------
