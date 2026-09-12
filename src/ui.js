@@ -278,6 +278,7 @@ export class UI {
 
     this._text(ctx, g.pressR, W / 2, 690, 34, '#ffffff', 'center');
     this._text(ctx, g.pressRClick, W / 2, 732, 20, 'rgba(180,200,230,0.8)', 'center');
+    this._text(ctx, g.pressM, W / 2, 774, 20, '#8fe3ff', 'center');
   }
 
   drawCountdown(ctx, state) {

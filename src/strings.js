@@ -78,6 +78,7 @@ export const STRINGS = {
     victoryBody: 'The hyperdrive is charged. They made it out.',
     pressR: 'PRESS R TO FLY AGAIN',
     pressRClick: 'Press R or click to fly again',
+    pressM: 'Press M to return to menu',
     score: 'SCORE',
     best: 'BEST SCORE',
     newBest: 'NEW BEST',

@@ -271,7 +271,12 @@ class Game {
     if (s.name === State.TITLE) return;
 
     const menuPressed = this.input.isDown('KeyM');
-    if (s.name === State.PAUSED && menuPressed && !this._menuHeld) {
+    const menuAllowed =
+      s.name === State.PAUSED ||
+      s.name === State.GAMEOVER_PLAYER ||
+      s.name === State.GAMEOVER_CONVOY ||
+      s.name === State.VICTORY;
+    if (menuAllowed && menuPressed && !this._menuHeld) {
       this.returnToTitle();
     }
     this._menuHeld = menuPressed;
