@@ -211,7 +211,7 @@ export class UI {
     this._text(ctx, '[WASD] / [ARROWS] MOVE', 790, 789, 18, '#8fe3ff', 'left');
     this._text(ctx, '[CLICK] FIRE', 1080, 789, 18, '#ffd166', 'left');
     this._text(ctx, '[SPACE] FORCE', 1250, 789, 18, '#8fe3a0', 'left');
-    this._text(ctx, 'R RESTART  ·  ESC PAUSE', 1210, 846, 16, 'rgba(180,200,230,0.72)', 'center');
+    this._text(ctx, 'R RESTART  ·  ESC PAUSE  ·  T AUDIO ON/OFF', 1210, 846, 16, 'rgba(180,200,230,0.72)', 'center');
 
     this._text(
       ctx,
