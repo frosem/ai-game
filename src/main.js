@@ -3,11 +3,11 @@
 // -> force -> collisions -> score/combo -> spawn -> dialog -> particles -> hud.
 
 import { CONFIG, clamp, difficultyAt } from './config.js';
-import { STRINGS } from './strings.js?v=audio-1';
-import { Input } from './input.js?v=audio-1';
+import { STRINGS } from './strings.js?v=audio-2';
+import { Input } from './input.js?v=audio-2';
 import { Renderer } from './render.js';
 import { AudioEngine } from './audio.js';
-import { UI } from './ui.js?v=audio-1';
+import { UI } from './ui.js?v=audio-2';
 import { Cinematic } from './cinematic.js';
 import { loadAssets } from './assets.js';
 import { Player } from './entities/player.js';
@@ -21,7 +21,7 @@ import { ForceSystem } from './systems/force.js';
 import { Score } from './systems/score.js';
 import { DialogSystem } from './systems/dialog.js';
 import { handleCollisions } from './systems/collision.js';
-import { Leaderboard } from './leaderboard.js?v=audio-1';
+import { Leaderboard } from './leaderboard.js?v=audio-2';
 
 const STEP = 1 / 60;
 const MAX_FRAME = 0.05; // 50 ms cap so alt-tab cannot tunnel collisions

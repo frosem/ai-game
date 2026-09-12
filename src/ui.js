@@ -2,7 +2,7 @@
 // the renderer's hudBegin() sets the letterbox transform.
 
 import { CONFIG, clamp } from './config.js';
-import { STRINGS } from './strings.js?v=audio-1';
+import { STRINGS } from './strings.js?v=audio-2';
 import { drawSprite } from './assets.js';
 
 const W = CONFIG.VIRTUAL_W;
