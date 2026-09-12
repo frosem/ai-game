@@ -444,6 +444,7 @@ export class Cinematic {
     ctx.textBaseline = 'middle';
     ctx.font = 'bold 22px system-ui, sans-serif';
     ctx.fillStyle = 'rgba(255,255,255,0.85)';
+    ctx.fillText(world.audio?.isMuted() ? 'SOUND OFF' : 'SOUND ON', W - 330, 60);
     ctx.fillText(STRINGS.skip, W - 110, 60);
     ctx.font = '18px system-ui, sans-serif';
     ctx.fillStyle = 'rgba(200,215,240,0.7)';

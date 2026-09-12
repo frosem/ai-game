@@ -7,7 +7,7 @@ export class AudioEngine {
   constructor() {
     this.ctx = null;
     this.master = null;
-    this.muted = true;
+    this.muted = false;
     this.enabled = false;
     this.buffers = new Map();
     this.loading = null;
