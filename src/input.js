@@ -21,6 +21,8 @@ export class Input {
   _bind() {
     window.addEventListener('keydown', (e) => {
       if (e.code === 'Tab') return;
+      const target = e.target;
+      if (target?.matches?.('input, textarea, select, [contenteditable="true"]')) return;
       this.keys.add(e.code);
       // stop arrows/space from scrolling the page
       if (
