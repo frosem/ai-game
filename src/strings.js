@@ -17,7 +17,7 @@ export const STRINGS = {
   muteLabel: 'MUTED',
   unmuteLabel: 'SOUND ON',
   pausedTitle: 'PAUSED',
-  pausedHint: 'Esc or P to resume · R to restart',
+  pausedHint: 'Esc / P resume · M main menu · R restart',
 
   controls: [
     'WASD / Arrow keys — move',

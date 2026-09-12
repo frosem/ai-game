@@ -57,7 +57,7 @@ export class Leaderboard {
     this.body.innerHTML = '<p class="leaderboard-hint">Loading scores...</p>';
     this.modal.hidden = false;
     try {
-      const response = await fetch(`/api/scores?limit=10&playerId=${encodeURIComponent(this.playerId)}`);
+      const response = await fetch(`/api/scores?limit=10&playerId=${encodeURIComponent(this.playerId)}&playerName=${encodeURIComponent(this.getName())}`);
       if (!response.ok) throw new Error('leaderboard request failed');
       const data = await response.json();
       this.renderRows(data.scores, data.player);

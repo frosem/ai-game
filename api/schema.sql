@@ -9,3 +9,4 @@ CREATE TABLE IF NOT EXISTS scores (
 
 CREATE INDEX IF NOT EXISTS scores_score_idx ON scores (score DESC, created_at ASC);
 CREATE INDEX IF NOT EXISTS scores_player_idx ON scores (player_id, score DESC);
+CREATE UNIQUE INDEX IF NOT EXISTS scores_player_name_unique_idx ON scores (lower(player_name));

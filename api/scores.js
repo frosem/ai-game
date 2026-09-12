@@ -26,26 +26,48 @@ export default async function handler(req, res) {
 async function getScores(req, res) {
   const limit = Math.min(50, Math.max(1, Number.parseInt(req.query.limit || '10', 10) || 10));
   const playerId = String(req.query.playerId || '').slice(0, 80);
-  const rows = await sql`
+  const playerName = cleanName(req.query.playerName);
+  const rows = await rankedScores(limit);
+  let player = null;
+  if (playerName) {
+    const best = await sql`
+      SELECT player_name, score, rank
+      FROM (
+        SELECT player_name, score,
+               RANK() OVER (ORDER BY score DESC, created_at ASC) AS rank
+        FROM scores
+      ) ranked
+      WHERE lower(player_name) = lower(${playerName})
+      LIMIT 1
+    `;
+    player = best[0] || null;
+  } else if (playerId) {
+    const owner = await sql`SELECT player_name FROM scores WHERE player_id = ${playerId} LIMIT 1`;
+    if (owner[0]) {
+      const best = await sql`
+        SELECT player_name, score, rank
+        FROM (
+          SELECT player_name, score,
+                 RANK() OVER (ORDER BY score DESC, created_at ASC) AS rank
+          FROM scores
+        ) ranked
+        WHERE lower(player_name) = lower(${owner[0].player_name})
+        LIMIT 1
+      `;
+      player = best[0] || null;
+    }
+  }
+  return json(res, 200, { scores: rows, player });
+}
+
+async function rankedScores(limit) {
+  return sql`
     SELECT player_name, score, created_at,
            RANK() OVER (ORDER BY score DESC, created_at ASC) AS rank
     FROM scores
     ORDER BY score DESC, created_at ASC
     LIMIT ${limit}
   `;
-  let player = null;
-  if (playerId) {
-    const best = await sql`
-      SELECT player_name, score,
-             RANK() OVER (ORDER BY score DESC, created_at ASC) AS rank
-      FROM scores
-      WHERE player_id = ${playerId}
-      ORDER BY score DESC, created_at ASC
-      LIMIT 1
-    `;
-    player = best[0] || null;
-  }
-  return json(res, 200, { scores: rows, player });
 }
 
 async function postScore(req, res) {
@@ -62,22 +84,38 @@ async function postScore(req, res) {
   }
 
   try {
-    await sql`
-      INSERT INTO scores (player_id, player_name, score, run_id)
-      VALUES (${playerId}, ${playerName}, ${score}, ${runId})
-      ON CONFLICT (run_id) DO NOTHING
+    const existing = await sql`
+      SELECT id, player_name, score
+      FROM scores
+      WHERE lower(player_name) = lower(${playerName})
+      LIMIT 1
     `;
+    if (!existing[0]) {
+      await sql`
+        INSERT INTO scores (player_id, player_name, score, run_id)
+        VALUES (${playerId}, ${playerName}, ${score}, ${runId})
+      `;
+    } else if (score > existing[0].score) {
+      await sql`
+        UPDATE scores
+        SET player_id = ${playerId}, player_name = ${playerName}, score = ${score},
+            run_id = ${runId}, created_at = NOW()
+        WHERE id = ${existing[0].id}
+      `;
+    }
   } catch (error) {
     console.error('score insert failed', error);
     return json(res, 500, { error: 'Could not save score.' });
   }
 
   const result = await sql`
-    SELECT player_name, score,
-           RANK() OVER (ORDER BY score DESC, created_at ASC) AS rank
-    FROM scores
-    WHERE player_id = ${playerId} AND score = ${score}
-    ORDER BY created_at DESC
+    SELECT player_name, score, rank
+    FROM (
+      SELECT player_name, score,
+             RANK() OVER (ORDER BY score DESC, created_at ASC) AS rank
+      FROM scores
+    ) ranked
+    WHERE lower(player_name) = lower(${playerName})
     LIMIT 1
   `;
   return json(res, 201, { score: result[0] || { player_name: playerName, score, rank: null } });

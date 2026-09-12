@@ -110,6 +110,7 @@ class Game {
     this.raf = 0;
     this.frameMs = 16;
     this._pauseHeld = false;
+    this._menuHeld = false;
     this._skipPrev = false;
     this.cinematicSeen = false;
     this._bindAudioUnlock();
@@ -269,6 +270,12 @@ class Game {
 
     if (s.name === State.TITLE) return;
 
+    const menuPressed = this.input.isDown('KeyM');
+    if (s.name === State.PAUSED && menuPressed && !this._menuHeld) {
+      this.returnToTitle();
+    }
+    this._menuHeld = menuPressed;
+
     if (this.input.restartPressed()) {
       if (
         s.name === State.GAMEOVER_PLAYER ||
@@ -383,6 +390,17 @@ class Game {
     this.fx.redTint = 0;
     this.fx.surgePulse = 0;
     this.acc = 0;
+    this.last = performance.now();
+  }
+
+  returnToTitle() {
+    this.state.name = State.TITLE;
+    this.state.pendingConvoyDeath = false;
+    this.state.slowmo = 0;
+    this.cinematicSeen = false;
+    this._pauseHeld = false;
+    this._menuHeld = false;
+    this._skipPrev = false;
     this.last = performance.now();
   }
 
